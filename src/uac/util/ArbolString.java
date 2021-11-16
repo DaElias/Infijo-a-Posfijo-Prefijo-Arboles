@@ -68,11 +68,11 @@ public class ArbolString {
                 while (true) {
                     if (this.signos.isEmpty()) {
                         System.out.println("Error!");
-                        return null;
+                        break;
                     }
                     char temporal = this.signos.pop().charValue();
                     if (temporal == '(') {
-                        return null;
+                        break;
                     } else {
                         salida += " " + temporal;
                     }
@@ -96,7 +96,7 @@ public class ArbolString {
                     while (true) {
                         if (Presedencia(termino)) {
                             this.signos.push(termino);
-                            return null;
+                            break;
                         } else {
                             salida += " " + this.signos.pop();
                         }
@@ -123,6 +123,12 @@ public class ArbolString {
     public void salidaPosfija(String infija){
         insertarArbolPosfija(convertInfijaPosfija(infija));
         postorden();
+    }
+    
+    //** Calcular infijo
+    public String calcularInfijo(String infijo){
+    ;
+        return evaluarInfijaPosfija(convertInfijaPosfija(infijo));
     }
     
     private String evaluarInfijaPosfija(String infija) {
@@ -199,7 +205,6 @@ public class ArbolString {
     }
 
     private void insertarArbolPosfija(String posfila) {
-        System.out.println(posfila);
         char[] listaC = posfila.toCharArray();
         for (int i = listaC.length - 1; i > 0; i--) {
             if (listaC[i] != ' ') {
@@ -210,7 +215,6 @@ public class ArbolString {
 
     public void insertarArbol(String posfila) {
         char[] listaC = posfila.toCharArray();
-        ArrayList<String> listaS = new ArrayList();
         for (int i = listaC.length - 1; i > 0; i--) {
             //System.out.print(listaC[i]);
             if (listaC[i] != ' ') {

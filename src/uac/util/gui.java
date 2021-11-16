@@ -182,7 +182,7 @@ public class gui extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        jTextField2.setText("text");
+        jTextField2.setText(actividad.calcularInfijo(temp));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
