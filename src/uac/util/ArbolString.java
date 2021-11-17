@@ -127,10 +127,10 @@ public class ArbolString {
     //** Calcular infijo
     public String calcularInfijo(String infija) {
         //System.out.println(convertInfijaPosfija(infija));
-        return evaluarPosfijo(convertInfijaPosfija(infija))+"";
+        return calcularPosfijo(convertInfijaPosfija(infija))+"";
     }
 
-    public static int evaluarPosfijo(String posfijo){              
+    private  int calcularPosfijo(String posfijo){              
         ArrayList<String> token = new ArrayList<String>();
         
         
@@ -204,8 +204,7 @@ public class ArbolString {
                         return 0;
                     }   
                 }
-            
-              System.out.println(token.toString()+"\n");
+              //System.out.println(token.toString()+"\n");
             }
             else{
                 c++;
