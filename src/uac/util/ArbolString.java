@@ -132,52 +132,10 @@ public class ArbolString {
     }
     
     private String evaluarInfijaPosfija(String infija) {
-        String[] post = infija.split(" ");
-        //Declaración de las pilas
-        Stack< String> E = new Stack< String>(); //Pila entrada
-        Stack< String> P = new Stack< String>(); //Pila de operandos
-
-        //Añadir post (array) a la Pila de entrada (E)
-        for (int i = post.length - 1; i >= 0; i--) {
-            E.push(post[i]);
-        }
-
-        //Algoritmo de Evaluación Postfija
-        String operadores = "+-*/%";
-        while (!E.isEmpty()) {
-            if (operadores.contains("" + E.peek())) {
-                P.push(evaluar(E.pop(), P.pop(), P.pop()) + "");
-            } else {
-                P.push(E.pop());
-            }
-        }
-
-        //Mostrar resultados:
-        System.out.println("Expresion: " + infija);
-        //System.out.println("Resultado: " + P.peek());
-        return P.peek();
+       return "";
     }
 
-    private int evaluar(String op, String n2, String n1) {
-        int num1 = Integer.parseInt(n1);
-        int num2 = Integer.parseInt(n2);
-        if (op.equals("+")) {
-            return (num1 + num2);
-        }
-        if (op.equals("-")) {
-            return (num1 - num2);
-        }
-        if (op.equals("*")) {
-            return (num1 * num2);
-        }
-        if (op.equals("/")) {
-            return (num1 / num2);
-        }
-        if (op.equals("%")) {
-            return (num1 % num2);
-        }
-        return 0;
-    }
+
 
     private boolean Presedencia(char termino) {
 
