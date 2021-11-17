@@ -8,6 +8,8 @@ package uac.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
+import java.util.StringTokenizer;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,10 +44,7 @@ public class ArbolString {
         this.mostrar = new ArrayList<>();
     }
 
-    public void convertInfijaPrefija(String infija) {
-
-        insertar(infija);
-    }
+  
 
     public void insertarArbolPrefija(String prefija) {
         char[] listaC = prefija.toCharArray();
@@ -120,22 +119,114 @@ public class ArbolString {
         return salida;
     }
 
-    public void salidaPosfija(String infija){
+    public void salidaPosfija(String infija) {
         insertarArbolPosfija(convertInfijaPosfija(infija));
         postorden();
     }
-    
+
     //** Calcular infijo
-    public String calcularInfijo(String infijo){
-    ;
-        return evaluarInfijaPosfija(convertInfijaPosfija(infijo));
+    public String calcularInfijo(String infija) {
+        //System.out.println(convertInfijaPosfija(infija));
+        return evaluarPosfijo(convertInfijaPosfija(infija))+"";
+    }
+
+    public static int evaluarPosfijo(String posfijo){              
+        ArrayList<String> token = new ArrayList<String>();
+        
+        
+        StringTokenizer st = new StringTokenizer(posfijo," ");
+        while(st.hasMoreTokens()){
+            token.add(st.nextToken());
+        }
+        
+        if(token.size()==1){
+            return Integer.parseInt(token.get(0));                
+        }
+        int c=0;
+        System.out.println(token.toString()+"\n");
+        while(token.size()!=1){
+            
+            String operador = token.get(c);
+            if(operador.equals("+")||operador.equals("-")||operador.equals("*")||operador.equals("/")||operador.equals("^")){
+                String operando1=token.get(c-1);
+                String operando2 =token.get(c-2);
+                
+                token.remove(c);
+                token.remove(c-1);
+                token.remove(c-2);
+                if(operador.equals("+")){
+                    try {
+                        String suma = (Integer.parseInt(operando2)+Integer.parseInt(operando1))+"";
+                        token.add(c-2,suma);
+                        c=0;
+                    } catch (Exception e) {
+                        System.out.println("Error al comvertir un operando\n"+e);
+                        return 0;
+                    }                    
+                }
+                else if(operador.equals("-")){
+                    try {
+                        String resta = (Integer.parseInt(operando2)-Integer.parseInt(operando1))+"";
+                        token.add(c-2,resta);
+                        c=0;
+                    } catch (Exception e) {
+                        System.out.println("Error al comvertir un operando\n"+e);
+                        return 0;
+                    }    
+                }
+                else if(operador.equals("*")){
+                    try {
+                        String multiplicacion = (Integer.parseInt(operando2)*Integer.parseInt(operando1))+"";
+                        token.add(c-2,multiplicacion);
+                        c=0;
+                    } catch (Exception e) {
+                        System.out.println("Error al comvertir un operando\n"+e);
+                        return 0;
+                    }    
+                }
+                else if(operador.equals("/")){
+                    try {
+                        String divicion = (Integer.parseInt(operando2)/Integer.parseInt(operando1))+"";
+                        token.add(c-2,divicion);
+                        c=0;
+                    } catch (Exception e) {
+                        System.out.println("Error al comvertir un operando\n"+e);
+                        return 0;
+                    }    
+                }
+                else{
+                    try {
+                        String potencia = (Integer.parseInt(operando2)^Integer.parseInt(operando1))+"";
+                        token.add(c-2,potencia);
+                        c=0;
+                    } catch (Exception e) {
+                        System.out.println("Error al comvertir un operando\n"+e);
+                        return 0;
+                    }   
+                }
+            
+              System.out.println(token.toString()+"\n");
+            }
+            else{
+                c++;
+            }
+        }
+        
+        
+        try {            
+            return Integer.parseInt(token.get(0));            
+        } catch (Exception e) {
+           System.out.println("Error al parsear el resultado\n"+e);
+            return 0;
+        }
+        
     }
     
-    private String evaluarInfijaPosfija(String infija) {
-       return "";
+    public void convertInfijaPrefija(String infijo) {
+      
     }
 
-
+   
 
     private boolean Presedencia(char termino) {
 
